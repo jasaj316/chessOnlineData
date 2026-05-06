@@ -1,6 +1,178 @@
+let data = {
+  White: {
+    PlayerName: "Emily",
+    Pieces: [
+      {
+        type: "p",
+        startPos: "a2",
+        pos: "a2"
+      },
+      {
+        type: "p",
+        startPos: "b2",
+        pos: "b2"
+      },
+      {
+        type: "p",
+        startPos: "c2",
+        pos: "c2"
+      },
+      {
+        type: "p",
+        startPos: "d2",
+        pos: "d2"
+      },
+      {
+        type: "p",
+        startPos: "e2",
+        pos: "e2"
+      },
+      {
+        type: "p",
+        startPos: "f2",
+        pos: "f2"
+      },
+      {
+        type: "p",
+        startPos: "g2",
+        pos: "g2"
+      },
+      {
+        type: "p",
+        startPos: "h2",
+        pos: "h2"
+      },
+      {
+        type: "r",
+        startPos: "a1",
+        pos: "a1"
+      },
+      {
+        type: "r",
+        startPos: "h1",
+        pos: "h1"
+      },
+      {
+        type: "n",
+        startPos: "b1",
+        pos: "b1"
+      },
+      {
+        type: "n",
+        startPos: "g1",
+        pos: "g1"
+      },
+      {
+        type: "b",
+        startPos: "c1",
+        pos: "c1"
+      },
+      {
+        type: "b",
+        startPos: "f1",
+        pos: "f1"
+      },
+      {
+        type: "q",
+        startPos: "d1",
+        pos: "d1"
+      },
+      {
+        type: "k",
+        startPos: "e1",
+        pos: "e1"
+      }
+    ]
+  },
+  Black: {
+    PlayerName: "Justin",
+    Pieces: [
+      {
+        type: "p",
+        startPos: "h7",
+        pos: "h7"
+      },
+      {
+        type: "p",
+        startPos: "g7",
+        pos: "g7"
+      },
+      {
+        type: "p",
+        startPos: "f7",
+        pos: "f7"
+      },
+      {
+        type: "p",
+        startPos: "e7",
+        pos: "e7"
+      },
+      {
+        type: "p",
+        startPos: "d7",
+        pos: "d7"
+      },
+      {
+        type: "p",
+        startPos: "c7",
+        pos: "c7"
+      },
+      {
+        type: "p",
+        startPos: "b7",
+        pos: "b7"
+      },
+      {
+        type: "p",
+        startPos: "a7",
+        pos: "a7"
+      },
+      {
+        type: "r",
+        startPos: "h8",
+        pos: "h8"
+      },
+      {
+        type: "r",
+        startPos: "a8",
+        pos: "a8"
+      },
+      {
+        type: "n",
+        startPos: "g8",
+        pos: "g8"
+      },
+      {
+        type: "n",
+        startPos: "b8",
+        pos: "b8"
+      },
+      {
+        type: "b",
+        startPos: "f8",
+        pos: "f8"
+      },
+      {
+        type: "b",
+        startPos: "c8",
+        pos: "c8"
+      },
+      {
+        type: "q",
+        startPos: "d8",
+        pos: "d8"
+      },
+      {
+        type: "k",
+        startPos: "e8",
+        pos: "e8"
+      }
+    ]
+  }
+}
 exports.handler = async event => {
   const { wPlayerName, wp1, wp2, wp3, wp4, wp5, wp6, wp7, wp8, wr1, wr2, wn1, wn2, wb1, wb2, wq, wk, bPlayerName, bp1, bp2, bp3, bp4, bp5, bp6, bp7, bp8, br1, br2, bn1, bn2, bb1, bb2, bq, bk } = event.queryStringParameters;
-  let data = {
+  data = {
     White: {
       PlayerName: `${wPlayerName}`,
       Pieces: [
