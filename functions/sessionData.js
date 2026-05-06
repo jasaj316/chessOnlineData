@@ -87,7 +87,7 @@ exports.handler = async event => {
       ]
     },
     Black: {
-      PlayerName: "Justin",
+      PlayerName: `${bPlayerName}`,
       Pieces: [
         {
           type: "p",
