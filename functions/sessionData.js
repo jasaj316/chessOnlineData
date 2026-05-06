@@ -1,6 +1,6 @@
 let data = {
   White: {
-    PlayerName: "",
+    PlayerName: "Emily",
     Pieces: [
       {
         type: "p",
