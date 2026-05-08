@@ -4,16 +4,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Online Chess</title>\
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
 </head>
 
 <body>
 
   <script>
+    const wPlayerNameInput = document.querySelector("");
+    //game state variables
     let wPlayerName, wp1, wp2, wp3, wp4, wp5, wp6, wp7, wp8, wr1, wr2, wn1, wn2, wb1, wb2, wq, wk, bPlayerName, bp1, bp2, bp3, bp4, bp5, bp6, bp7, bp8, br1, br2, bn1, bn2, bb1, bb2, bq, bk, data;
 
-    //resets the board
-    function reset() {
+    //resets the local data
+    function resetLocal() {
       wPlayerName = "Justin";
       wp1 = "a2";
       wp2 = "b2";
@@ -50,18 +57,23 @@
       bk = "e8";
     }
 
-    //set sessionData
-    async function setData() {
+    //set cloud data
+    async function setCloud() {
       const params = `?wPlayerName=${wPlayerName}&wp1=${wp1}&wp2=${wp2}&wp3=${wp3}&wp4=${wp4}&wp5=${wp5}&wp6=${wp6}&wp7=${wp7}&wp8=${wp8}&wr1=${wr1}&wr2=${wr2}&wn1=${wn1}&wn2=${wn2}&wb1=${wb1}&wb2=${wb2}&wq=${wq}&wk=${wk}&bPlayerName=${bPlayerName}&bp1=${bp1}&bp2=${bp2}&bp3=${bp3}&bp4=${bp4}&bp5=${bp5}&bp6=${bp6}&bp7=${bp7}&bp8=${bp8}&br1=${br1}&br2=${br2}&bn1=${bn1}&bn2=${bn2}&bb1=${bb1}&bb2=${bb2}&bq=${bq}&bk=${bk}`;
       const blob = await fetch(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData${params}&set=true`);
     }
 
-    //get sessionData
-    async function getData() {
-      const blob = await fetch(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData`);
-      const json = await blob.json();
+    //set local data
+    function setLocal(json) {
       console.log(json);
       data = json;
+    }
+
+    //get cloud data
+    async function getCloud() {
+      const blob = await fetch(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData`);
+      const json = await blob.json();
+      setLocal(json);
     }
 
   </script>
