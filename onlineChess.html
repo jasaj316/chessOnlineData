@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    let wPlayerName, wp1, wp2, wp3, wp4, wp5, wp6, wp7, wp8, wr1, wr2, wn1, wn2, wb1, wb2, wq, wk, bPlayerName, bp1, bp2, bp3, bp4, bp5, bp6, bp7, bp8, br1, br2, bn1, bn2, bb1, bb2, bq, bk, data;
+
+    //resets the board
+    function reset() {
+      wPlayerName = "Justin";
+      wp1 = "a2";
+      wp2 = "b2";
+      wp3 = "c2";
+      wp4 = "d2";
+      wp5 = "e2";
+      wp6 = "f2";
+      wp7 = "g2";
+      wp8 = "h2";
+      wr1 = "a1";
+      wr2 = "h1";
+      wn1 = "b1";
+      wn2 = "g1";
+      wb1 = "c1";
+      wb2 = "f1";
+      wq = "d1";
+      wk = "e1";
+      bPlayerName = "Emily";
+      bp1 = "h7";
+      bp2 = "g7";
+      bp3 = "f7";
+      bp4 = "e7";
+      bp5 = "d7";
+      bp6 = "c7";
+      bp7 = "b7";
+      bp8 = "a7";
+      br1 = "h8";
+      br2 = "a8";
+      bn1 = "g8";
+      bn2 = "b8";
+      bb1 = "f8";
+      bb2 = "c8";
+      bq = "d8";
+      bk = "e8";
+    }
+
+    //set sessionData
+    async function setData() {
+      const params = `?wPlayerName=${wPlayerName}&wp1=${wp1}&wp2=${wp2}&wp3=${wp3}&wp4=${wp4}&wp5=${wp5}&wp6=${wp6}&wp7=${wp7}&wp8=${wp8}&wr1=${wr1}&wr2=${wr2}&wn1=${wn1}&wn2=${wn2}&wb1=${wb1}&wb2=${wb2}&wq=${wq}&wk=${wk}&bPlayerName=${bPlayerName}&bp1=${bp1}&bp2=${bp2}&bp3=${bp3}&bp4=${bp4}&bp5=${bp5}&bp6=${bp6}&bp7=${bp7}&bp8=${bp8}&br1=${br1}&br2=${br2}&bn1=${bn1}&bn2=${bn2}&bb1=${bb1}&bb2=${bb2}&bq=${bq}&bk=${bk}`;
+      const blob = await fetch(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData${params}&set=true`);
+    }
+
+    //get sessionData
+    async function getData() {
+      const blob = await fetch(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData`);
+      const json = await blob.json();
+      console.log(json);
+      data = json;
+    }
+
+  </script>
+</body>
+
+</html>
