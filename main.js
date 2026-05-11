@@ -5,7 +5,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 //game state variables
 let wPlayerName, wp1, wp2, wp3, wp4, wp5, wp6, wp7, wp8, wr1, wr2, wn1, wn2, wb1, wb2, wq, wk, bPlayerName, bp1, bp2, bp3, bp4, bp5, bp6, bp7, bp8, br1, br2, bn1, bn2, bb1, bb2, bq, bk;
-let data
+let localData;
 
 //scene setup
 const scene = new THREE.Scene();
@@ -141,7 +141,7 @@ async function setServer() {
 //set local data
 function setLocal(json) {
   console.log(json);
-  data = json;
+  localData = json;
 }
 
 //get server data
@@ -150,3 +150,4 @@ async function getServer() {
   const json = await blob.json();
   setLocal(json);
 }
+getServer();

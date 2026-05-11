@@ -101,7 +101,6 @@ let data = {
       },
       {
         type: "p",
-        startPos: "a7",
         pos: "a7"
       },
       {
