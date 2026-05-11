@@ -23,44 +23,45 @@ document.body.appendChild(renderer.domElement);
 //object variables
 let glb, wp1Glb, wp2Glb, wp3Glb, wp4Glb, wp5Glb, wp6Glb, wp7Glb, wp8Glb, wr1Glb, wr2Glb, wn1Glb, wn2Glb, wb1Glb, wb2Glb, wqGlb, wkGlb, bp1Glb, bp2Glb, bp3Glb, bp4Glb, bp5Glb, bp6Glb, bp7Glb, bp8Glb, br1Glb, br2Glb, bn1Glb, bn2Glb, bb1Glb, bb2Glb, bqGlb, bkGlb;
 const loader = new GLTFLoader();
+const hiddenPos = (-99999, 99999, 99999);
 
 //set positions of everything using localData
 function setAllPos(hide) {
   //white
   if (hide) {
-    wp1Glb.position.set(-99999, 99999, 99999);
-    wp2Glb.position.set(-99999, 99999, 99999);
-    wp3Glb.position.set(-99999, 99999, 99999);
-    wp4Glb.position.set(-99999, 99999, 99999);
-    wp5Glb.position.set(-99999, 99999, 99999);
-    wp6Glb.position.set(-99999, 99999, 99999);
-    wp7Glb.position.set(-99999, 99999, 99999);
-    wp8Glb.position.set(-99999, 99999, 99999);
-    wr1Glb.position.set(-99999, 99999, 99999);
-    wr2Glb.position.set(-99999, 99999, 99999);
-    wn1Glb.position.set(-99999, 99999, 99999);
-    wn2Glb.position.set(-99999, 99999, 99999);
-    wb1Glb.position.set(-99999, 99999, 99999);
-    wb2Glb.position.set(-99999, 99999, 99999);
-    wqGlb.position.set(-99999, 99999, 99999);
-    wkGlb.position.set(-99999, 99999, 99999);
+    wp1Glb.position.set(hiddenPos);
+    wp2Glb.position.set(hiddenPos);
+    wp3Glb.position.set(hiddenPos);
+    wp4Glb.position.set(hiddenPos);
+    wp5Glb.position.set(hiddenPos);
+    wp6Glb.position.set(hiddenPos);
+    wp7Glb.position.set(hiddenPos);
+    wp8Glb.position.set(hiddenPos);
+    wr1Glb.position.set(hiddenPos);
+    wr2Glb.position.set(hiddenPos);
+    wn1Glb.position.set(hiddenPos);
+    wn2Glb.position.set(hiddenPos);
+    wb1Glb.position.set(hiddenPos);
+    wb2Glb.position.set(hiddenPos);
+    wqGlb.position.set(hiddenPos);
+    wkGlb.position.set(hiddenPos);
     //black
-    bp1Glb.position.set(-99999, 99999, 99999);
-    bp2Glb.position.set(-99999, 99999, 99999);
-    bp3Glb.position.set(-99999, 99999, 99999);
-    bp4Glb.position.set(-99999, 99999, 99999);
-    bp5Glb.position.set(-99999, 99999, 99999);
-    bp6Glb.position.set(-99999, 99999, 99999);
-    bp7Glb.position.set(-99999, 99999, 99999);
-    bp8Glb.position.set(-99999, 99999, 99999);
-    br1Glb.position.set(-99999, 99999, 99999);
-    br2Glb.position.set(-99999, 99999, 99999);
-    bn1Glb.position.set(-99999, 99999, 99999);
-    bn2Glb.position.set(-99999, 99999, 99999);
-    bb1Glb.position.set(-99999, 99999, 99999);
-    bb2Glb.position.set(-99999, 99999, 99999);
-    bqGlb.position.set(-99999, 99999, 99999);
-    bkGlb.position.set(-99999, 99999, 99999);
+    bp1Glb.position.set(hiddenPos);
+    bp2Glb.position.set(hiddenPos);
+    bp3Glb.position.set(hiddenPos);
+    bp4Glb.position.set(hiddenPos);
+    bp5Glb.position.set(hiddenPos);
+    bp6Glb.position.set(hiddenPos);
+    bp7Glb.position.set(hiddenPos);
+    bp8Glb.position.set(hiddenPos);
+    br1Glb.position.set(hiddenPos);
+    br2Glb.position.set(hiddenPos);
+    bn1Glb.position.set(hiddenPos);
+    bn2Glb.position.set(hiddenPos);
+    bb1Glb.position.set(hiddenPos);
+    bb2Glb.position.set(hiddenPos);
+    bqGlb.position.set(hiddenPos);
+    bkGlb.position.set(hiddenPos);
   }
   else {
     wp1Glb.position.set(-70, 0, 50);
