@@ -4,82 +4,66 @@ let data = {
     Pieces: [
       {
         type: "p",
-        startPos: "a2",
         pos: "a2"
       },
       {
         type: "p",
-        startPos: "b2",
         pos: "b2"
       },
       {
         type: "p",
-        startPos: "c2",
         pos: "c2"
       },
       {
         type: "p",
-        startPos: "d2",
         pos: "d2"
       },
       {
         type: "p",
-        startPos: "e2",
         pos: "e2"
       },
       {
         type: "p",
-        startPos: "f2",
         pos: "f2"
       },
       {
         type: "p",
-        startPos: "g2",
         pos: "g2"
       },
       {
         type: "p",
-        startPos: "h2",
         pos: "h2"
       },
       {
         type: "r",
-        startPos: "a1",
         pos: "a1"
       },
       {
         type: "r",
-        startPos: "h1",
         pos: "h1"
       },
       {
         type: "n",
-        startPos: "b1",
         pos: "b1"
       },
       {
         type: "n",
-        startPos: "g1",
         pos: "g1"
       },
       {
         type: "b",
-        startPos: "c1",
         pos: "c1"
       },
       {
         type: "b",
-        startPos: "f1",
         pos: "f1"
       },
       {
         type: "q",
-        startPos: "d1",
         pos: "d1"
       },
       {
         type: "k",
-        startPos: "e1",
         pos: "e1"
       }
     ]
@@ -89,37 +73,30 @@ let data = {
     Pieces: [
       {
         type: "p",
-        startPos: "h7",
         pos: "h7"
       },
       {
         type: "p",
-        startPos: "g7",
         pos: "g7"
       },
       {
         type: "p",
-        startPos: "f7",
         pos: "f7"
       },
       {
         type: "p",
-        startPos: "e7",
         pos: "e7"
       },
       {
         type: "p",
-        startPos: "d7",
         pos: "d7"
       },
       {
         type: "p",
-        startPos: "c7",
         pos: "c7"
       },
       {
         type: "p",
-        startPos: "b7",
         pos: "b7"
       },
       {
@@ -129,42 +106,34 @@ let data = {
       },
       {
         type: "r",
-        startPos: "h8",
         pos: "h8"
       },
       {
         type: "r",
-        startPos: "a8",
         pos: "a8"
       },
       {
         type: "n",
-        startPos: "g8",
         pos: "g8"
       },
       {
         type: "n",
-        startPos: "b8",
         pos: "b8"
       },
       {
         type: "b",
-        startPos: "f8",
         pos: "f8"
       },
       {
         type: "b",
-        startPos: "c8",
         pos: "c8"
       },
       {
         type: "q",
-        startPos: "d8",
         pos: "d8"
       },
       {
         type: "k",
-        startPos: "e8",
         pos: "e8"
       }
     ]
@@ -173,178 +142,146 @@ let data = {
 exports.handler = async event => {
   const { wPlayerName, wp1, wp2, wp3, wp4, wp5, wp6, wp7, wp8, wr1, wr2, wn1, wn2, wb1, wb2, wq, wk, bPlayerName, bp1, bp2, bp3, bp4, bp5, bp6, bp7, bp8, br1, br2, bn1, bn2, bb1, bb2, bq, bk, set } = event.queryStringParameters;
   if (set) {
-  data = {
-    White: {
-      PlayerName: `${wPlayerName}`,
-      Pieces: [
-        {
-          type: "p",
-          startPos: "a2",
-          pos: `${wp1}`
-        },
-        {
-          type: "p",
-          startPos: "b2",
-          pos: `${wp2}`
-        },
-        {
-          type: "p",
-          startPos: "c2",
-          pos: `${wp3}`
-        },
-        {
-          type: "p",
-          startPos: "d2",
-          pos: `${wp4}`
-        },
-        {
-          type: "p",
-          startPos: "e2",
-          pos: `${wp5}`
-        },
-        {
-          type: "p",
-          startPos: "f2",
-          pos: `${wp6}`
-        },
-        {
-          type: "p",
-          startPos: "g2",
-          pos: `${wp7}`
-        },
-        {
-          type: "p",
-          startPos: "h2",
-          pos: `${wp8}`
-        },
-        {
-          type: "r",
-          startPos: "a1",
-          pos: `${wr1}`
-        },
-        {
-          type: "r",
-          startPos: "h1",
-          pos: `${wr2}`
-        },
-        {
-          type: "n",
-          startPos: "b1",
-          pos: `${wn1}`
-        },
-        {
-          type: "n",
-          startPos: "g1",
-          pos: `${wn2}`
-        },
-        {
-          type: "b",
-          startPos: "c1",
-          pos: `${wb1}`
-        },
-        {
-          type: "b",
-          startPos: "f1",
-          pos: `${wb2}`
-        },
-        {
-          type: "q",
-          startPos: "d1",
-          pos: `${wq}`
-        },
-        {
-          type: "k",
-          startPos: "e1",
-          pos: `${wk}`
-        }
-      ]
-    },
-    Black: {
-      PlayerName: `${bPlayerName}`,
-      Pieces: [
-        {
-          type: "p",
-          startPos: "h7",
-          pos: `${bp1}`
-        },
-        {
-          type: "p",
-          startPos: "g7",
-          pos: `${bp2}`
-        },
-        {
-          type: "p",
-          startPos: "f7",
-          pos: `${bp3}`
-        },
-        {
-          type: "p",
-          startPos: "e7",
-          pos: `${bp4}`
-        },
-        {
-          type: "p",
-          startPos: "d7",
-          pos: `${bp5}`
-        },
-        {
-          type: "p",
-          startPos: "c7",
-          pos: `${bp6}`
-        },
-        {
-          type: "p",
-          startPos: "b7",
-          pos: `${bp7}`
-        },
-        {
-          type: "p",
-          startPos: "a7",
-          pos: `${bp8}`
-        },
-        {
-          type: "r",
-          startPos: "h8",
-          pos: `${br1}`
-        },
-        {
-          type: "r",
-          startPos: "a8",
-          pos: `${br2}`
-        },
-        {
-          type: "n",
-          startPos: "g8",
-          pos: `${bn1}`
-        },
-        {
-          type: "n",
-          startPos: "b8",
-          pos: `${bn2}`
-        },
-        {
-          type: "b",
-          startPos: "f8",
-          pos: `${bb1}`
-        },
-        {
-          type: "b",
-          startPos: "c8",
-          pos: `${bb2}`
-        },
-        {
-          type: "q",
-          startPos: "d8",
-          pos: `${bq}`
-        },
-        {
-          type: "k",
-          startPos: "e8",
-          pos: `${bk}`
-        }
-      ]
-    }
-  };
+    data = {
+      White: {
+        PlayerName: `${wPlayerName}`,
+        Pieces: [
+          {
+            type: "p",
+            pos: `${wp1}`
+          },
+          {
+            type: "p",
+            pos: `${wp2}`
+          },
+          {
+            type: "p",
+            pos: `${wp3}`
+          },
+          {
+            type: "p",
+            pos: `${wp4}`
+          },
+          {
+            type: "p",
+            pos: `${wp5}`
+          },
+          {
+            type: "p",
+            pos: `${wp6}`
+          },
+          {
+            type: "p",
+            pos: `${wp7}`
+          },
+          {
+            type: "p",
+            pos: `${wp8}`
+          },
+          {
+            type: "r",
+            pos: `${wr1}`
+          },
+          {
+            type: "r",
+            pos: `${wr2}`
+          },
+          {
+            type: "n",
+            pos: `${wn1}`
+          },
+          {
+            type: "n",
+            pos: `${wn2}`
+          },
+          {
+            type: "b",
+            pos: `${wb1}`
+          },
+          {
+            type: "b",
+            pos: `${wb2}`
+          },
+          {
+            type: "q",
+            pos: `${wq}`
+          },
+          {
+            type: "k",
+            pos: `${wk}`
+          }
+        ]
+      },
+      Black: {
+        PlayerName: `${bPlayerName}`,
+        Pieces: [
+          {
+            type: "p",
+            pos: `${bp1}`
+          },
+          {
+            type: "p",
+            pos: `${bp2}`
+          },
+          {
+            type: "p",
+            pos: `${bp3}`
+          },
+          {
+            type: "p",
+            pos: `${bp4}`
+          },
+          {
+            type: "p",
+            pos: `${bp5}`
+          },
+          {
+            type: "p",
+            pos: `${bp6}`
+          },
+          {
+            type: "p",
+            pos: `${bp7}`
+          },
+          {
+            type: "p",
+            pos: `${bp8}`
+          },
+          {
+            type: "r",
+            pos: `${br1}`
+          },
+          {
+            type: "r",
+            pos: `${br2}`
+          },
+          {
+            type: "n",
+            pos: `${bn1}`
+          },
+          {
+            type: "n",
+            pos: `${bn2}`
+          },
+          {
+            type: "b",
+            pos: `${bb1}`
+          },
+          {
+            type: "b",
+            pos: `${bb2}`
+          },
+          {
+            type: "q",
+            pos: `${bq}`
+          },
+          {
+            type: "k",
+            pos: `${bk}`
+          }
+        ]
+      }
+    };
   }
   const json = JSON.stringify(data);
   return {
