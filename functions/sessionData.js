@@ -1,4 +1,5 @@
-let data = {
+//import { resetData } from '../resetData.js';
+let resetData = {
   White: {
     PlayerName: "Emily",
     Pieces: [
@@ -60,11 +61,11 @@ let data = {
       },
       {
         type: "q",
-        pos: "d1"
+        pos: "e1"
       },
       {
         type: "k",
-        pos: "e1"
+        pos: "d1"
       }
     ]
   },
@@ -129,11 +130,11 @@ let data = {
       },
       {
         type: "q",
-        pos: "d8"
+        pos: "e8"
       },
       {
         type: "k",
-        pos: "e8"
+        pos: "d8"
       }
     ]
   }

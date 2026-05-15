@@ -1,11 +1,10 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { resetData } from './resetData.js';
 
-//game state variables
-let wPlayerName, wp1, wp2, wp3, wp4, wp5, wp6, wp7, wp8, wr1, wr2, wn1, wn2, wb1, wb2, wq, wk, bPlayerName, bp1, bp2, bp3, bp4, bp5, bp6, bp7, bp8, br1, br2, bn1, bn2, bb1, bb2, bq, bk;
-let localData;
+//game state object
+let localData = {};
 
 //scene setup
 const scene = new THREE.Scene();
@@ -14,163 +13,71 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 scene.add(directionalLight);
 
 //add renderer
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-//create and add objects
-//#region
-//object variables
-let glb, wp1Glb, wp2Glb, wp3Glb, wp4Glb, wp5Glb, wp6Glb, wp7Glb, wp8Glb, wr1Glb, wr2Glb, wn1Glb, wn2Glb, wb1Glb, wb2Glb, wqGlb, wkGlb, bp1Glb, bp2Glb, bp3Glb, bp4Glb, bp5Glb, bp6Glb, bp7Glb, bp8Glb, br1Glb, br2Glb, bn1Glb, bn2Glb, bb1Glb, bb2Glb, bqGlb, bkGlb;
-const loader = new GLTFLoader();
-const hiddenPos = (-99999, 99999, 99999);
-
-//set positions of everything using localData
-function setAllPos(hide) {
-  //white
-  if (hide) {
-    wp1Glb.position.set(hiddenPos);
-    wp2Glb.position.set(hiddenPos);
-    wp3Glb.position.set(hiddenPos);
-    wp4Glb.position.set(hiddenPos);
-    wp5Glb.position.set(hiddenPos);
-    wp6Glb.position.set(hiddenPos);
-    wp7Glb.position.set(hiddenPos);
-    wp8Glb.position.set(hiddenPos);
-    wr1Glb.position.set(hiddenPos);
-    wr2Glb.position.set(hiddenPos);
-    wn1Glb.position.set(hiddenPos);
-    wn2Glb.position.set(hiddenPos);
-    wb1Glb.position.set(hiddenPos);
-    wb2Glb.position.set(hiddenPos);
-    wqGlb.position.set(hiddenPos);
-    wkGlb.position.set(hiddenPos);
-    //black
-    bp1Glb.position.set(hiddenPos);
-    bp2Glb.position.set(hiddenPos);
-    bp3Glb.position.set(hiddenPos);
-    bp4Glb.position.set(hiddenPos);
-    bp5Glb.position.set(hiddenPos);
-    bp6Glb.position.set(hiddenPos);
-    bp7Glb.position.set(hiddenPos);
-    bp8Glb.position.set(hiddenPos);
-    br1Glb.position.set(hiddenPos);
-    br2Glb.position.set(hiddenPos);
-    bn1Glb.position.set(hiddenPos);
-    bn2Glb.position.set(hiddenPos);
-    bb1Glb.position.set(hiddenPos);
-    bb2Glb.position.set(hiddenPos);
-    bqGlb.position.set(hiddenPos);
-    bkGlb.position.set(hiddenPos);
-  }
-  else {
-    wp1Glb.position.set(-70, 0, 50);
-    wp2Glb.position.set(-50, 0, 50);
-    wp3Glb.position.set(-30, 0, 50);
-    wp4Glb.position.set(-10, 0, 50);
-    wp5Glb.position.set(10, 0, 50);
-    wp6Glb.position.set(30, 0, 50);
-    wp7Glb.position.set(50, 0, 50);
-    wp8Glb.position.set(70, 0, 50);
-    wr1Glb.position.set(-70, 0, 70);
-    wr2Glb.position.set(70, 0, 70);
-    wn1Glb.position.set(-50, 0, 70);
-    wn2Glb.position.set(50, 0, 70);
-    wb1Glb.position.set(-30, 0, 70);
-    wb2Glb.position.set(30, 0, 70);
-    wqGlb.position.set(10, 0, 70);
-    wkGlb.position.set(-10, 0, 70);
-    //black
-    bp1Glb.position.set(-70, 0, -50);
-    bp2Glb.position.set(-50, 0, -50);
-    bp3Glb.position.set(-30, 0, -50);
-    bp4Glb.position.set(-10, 0, -50);
-    bp5Glb.position.set(10, 0, -50);
-    bp6Glb.position.set(30, 0, -50);
-    bp7Glb.position.set(50, 0, -50);
-    bp8Glb.position.set(70, 0, -50);
-    br1Glb.position.set(-70, 0, -70);
-    br2Glb.position.set(70, 0, -70);
-    bn1Glb.position.set(-50, 0, -70);
-    bn2Glb.position.set(50, 0, -70);
-    bb1Glb.position.set(-30, 0, -70);
-    bb2Glb.position.set(30, 0, -70);
-    bqGlb.position.set(10, 0, -70);
-    bkGlb.position.set(-10, 0, -70);
-  }
+//input chess code, return vector3
+function decodePos(code = "a1") {
+  return new THREE.Vector3(((code.charCodeAt(0) - 96) * 20) - 90, 0, (code.charAt(1) * 20) - 90);
 }
 
-//loads all pieces into the scene
-//white
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp1Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp2Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp3Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp4Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp5Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp6Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp7Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(wp8Glb = glb.scene);
-glb = await loader.loadAsync('public/rook.glb');
-scene.add(wr1Glb = glb.scene);
-glb = await loader.loadAsync('public/rook.glb');
-scene.add(wr2Glb = glb.scene);
-glb = await loader.loadAsync('public/knight.glb');
-scene.add(wn1Glb = glb.scene);
-glb = await loader.loadAsync('public/knight.glb');
-scene.add(wn2Glb = glb.scene);
-glb = await loader.loadAsync('public/bishop.glb');
-scene.add(wb1Glb = glb.scene);
-glb = await loader.loadAsync('public/bishop.glb');
-scene.add(wb2Glb = glb.scene);
-glb = await loader.loadAsync('public/queen.glb');
-scene.add(wqGlb = glb.scene);
-glb = await loader.loadAsync('public/king.glb');
-scene.add(wkGlb = glb.scene);
-//black
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp1Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp2Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp3Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp4Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp5Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp6Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp7Glb = glb.scene);
-glb = await loader.loadAsync('public/pawn.glb');
-scene.add(bp8Glb = glb.scene);
-glb = await loader.loadAsync('public/rook.glb');
-scene.add(br1Glb = glb.scene);
-glb = await loader.loadAsync('public/rook.glb');
-scene.add(br2Glb = glb.scene);
-glb = await loader.loadAsync('public/knight.glb');
-scene.add(bn1Glb = glb.scene);
-glb = await loader.loadAsync('public/knight.glb');
-scene.add(bn2Glb = glb.scene);
-glb = await loader.loadAsync('public/bishop.glb');
-scene.add(bb1Glb = glb.scene);
-glb = await loader.loadAsync('public/bishop.glb');
-scene.add(bb2Glb = glb.scene);
-glb = await loader.loadAsync('public/queen.glb');
-scene.add(bqGlb = glb.scene);
-glb = await loader.loadAsync('public/king.glb');
-scene.add(bkGlb = glb.scene);
-setAllPos(true);
+//object variables
+let glb, wp1Glb, wp2Glb, wp3Glb, wp4Glb, wp5Glb, wp6Glb, wp7Glb, wp8Glb, wr1Glb, wr2Glb, wn1Glb, wn2Glb, wb1Glb, wb2Glb, wqGlb, wkGlb, bp1Glb, bp2Glb, bp3Glb, bp4Glb, bp5Glb, bp6Glb, bp7Glb, bp8Glb, br1Glb, br2Glb, bn1Glb, bn2Glb, bb1Glb, bb2Glb, bqGlb, bkGlb;
+//array of glb objects. [0]=white [1]=black [2]=board
+const glbArr = [[wp1Glb, wp2Glb, wp3Glb, wp4Glb, wp5Glb, wp6Glb, wp7Glb, wp8Glb, wr1Glb, wr2Glb, wn1Glb, wn2Glb, wb1Glb, wb2Glb, wqGlb, wkGlb], [bp1Glb, bp2Glb, bp3Glb, bp4Glb, bp5Glb, bp6Glb, bp7Glb, bp8Glb, br1Glb, br2Glb, bn1Glb, bn2Glb, bb1Glb, bb2Glb, bqGlb, bkGlb]];
 
+//loads all pieces into the scene
+const loader = new GLTFLoader();
+for (let c = 0; c < 2; c++) {
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][0] = glb.scene);
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][1] = glb.scene);
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][2] = glb.scene);
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][3] = glb.scene);
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][4] = glb.scene);
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][5] = glb.scene);
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][6] = glb.scene);
+  glb = await loader.loadAsync('public/pawn.glb');
+  scene.add(glbArr[c][7] = glb.scene);
+  glb = await loader.loadAsync('public/rook.glb');
+  scene.add(glbArr[c][8] = glb.scene);
+  glb = await loader.loadAsync('public/rook.glb');
+  scene.add(glbArr[c][9] = glb.scene);
+  glb = await loader.loadAsync('public/knight.glb');
+  scene.add(glbArr[c][10] = glb.scene);
+  glb = await loader.loadAsync('public/knight.glb');
+  scene.add(glbArr[c][11] = glb.scene);
+  glb = await loader.loadAsync('public/bishop.glb');
+  scene.add(glbArr[c][12] = glb.scene);
+  glb = await loader.loadAsync('public/bishop.glb');
+  scene.add(glbArr[c][13] = glb.scene);
+  glb = await loader.loadAsync('public/queen.glb');
+  scene.add(glbArr[c][14] = glb.scene);
+  glb = await loader.loadAsync('public/king.glb');
+  scene.add(glbArr[c][15] = glb.scene);
+}
+
+//set pieces to a hidden position
+for (let i = 0; i < 16; i++) {
+  glbArr[0][i].position.set(-99999, 99999, 99999);
+  glbArr[1][i].position.set(-99999, 99999, 99999);
+}
+
+//assign materials
+glbArr[1][15].traverse((mesh) => {
+  mesh.material = new THREE.MeshStandardMaterial({ color: 0xff00ff });
+});
+
+//camera
 const controls = new OrbitControls(camera, renderer.domElement);
-camera.position.y = 50; camera.position.z = 50;
+camera.position.y = 100; camera.position.z = -120;
 
 //render loop
 function animate(time) {
@@ -179,64 +86,40 @@ function animate(time) {
 }
 renderer.setAnimationLoop(animate);
 
-
 //resets the local data
 function resetLocal() {
-  wPlayerName = "Justin";
-  wp1 = "a2";
-  wp2 = "b2";
-  wp3 = "c2";
-  wp4 = "d2";
-  wp5 = "e2";
-  wp6 = "f2";
-  wp7 = "g2";
-  wp8 = "h2";
-  wr1 = "a1";
-  wr2 = "h1";
-  wn1 = "b1";
-  wn2 = "g1";
-  wb1 = "c1";
-  wb2 = "f1";
-  wq = "d1";
-  wk = "e1";
-  bPlayerName = "Emily";
-  bp1 = "h7";
-  bp2 = "g7";
-  bp3 = "f7";
-  bp4 = "e7";
-  bp5 = "d7";
-  bp6 = "c7";
-  bp7 = "b7";
-  bp8 = "a7";
-  br1 = "h8";
-  br2 = "a8";
-  bn1 = "g8";
-  bn2 = "b8";
-  bb1 = "f8";
-  bb2 = "c8";
-  bq = "d8";
-  bk = "e8";
+  localData = resetData;
 }
 
-//set server data
+//set server data using localData
 async function setServer() {
-  const params = `?wPlayerName=${wPlayerName}&wp1=${wp1}&wp2=${wp2}&wp3=${wp3}&wp4=${wp4}&wp5=${wp5}&wp6=${wp6}&wp7=${wp7}&wp8=${wp8}&wr1=${wr1}&wr2=${wr2}&wn1=${wn1}&wn2=${wn2}&wb1=${wb1}&wb2=${wb2}&wq=${wq}&wk=${wk}&bPlayerName=${bPlayerName}&bp1=${bp1}&bp2=${bp2}&bp3=${bp3}&bp4=${bp4}&bp5=${bp5}&bp6=${bp6}&bp7=${bp7}&bp8=${bp8}&br1=${br1}&br2=${br2}&bn1=${bn1}&bn2=${bn2}&bb1=${bb1}&bb2=${bb2}&bq=${bq}&bk=${bk}`;
+  const params = `?wPlayerName=${localData.White.PlayerName}&wp1=${localData.White.Pieces[0].pos}&wp2=${localData.White.Pieces[1].pos}&wp3=${localData.White.Pieces[2].pos}&wp4=${localData.White.Pieces[3].pos}` +
+    `&wp5=${localData.White.Pieces[4].pos}&wp6=${localData.White.Pieces[5].pos}&wp7=${localData.White.Pieces[6].pos}&wp8=${localData.White.Pieces[7].pos}&wr1=${localData.White.Pieces[8].pos}` +
+    `&wr2=${localData.White.Pieces[9].pos}&wn1=${localData.White.Pieces[10].pos}&wn2=${localData.White.Pieces[11].pos}&wb1=${localData.White.Pieces[12].pos}&wb2=${localData.White.Pieces[13].pos}` +
+    `&wq=${localData.White.Pieces[14].pos}&wk=${localData.White.Pieces[15].pos}` +
+    `&bPlayerName=${localData.Black.PlayerName}&bp1=${localData.Black.Pieces[0].pos}&bp2=${localData.Black.Pieces[1].pos}&bp3=${localData.Black.Pieces[2].pos}&bp4=${localData.Black.Pieces[3].pos}` +
+    `&bp5=${localData.Black.Pieces[4].pos}&bp6=${localData.Black.Pieces[5].pos}&bp7=${localData.Black.Pieces[6].pos}&bp8=${localData.Black.Pieces[7].pos}&br1=${localData.Black.Pieces[8].pos}` +
+    `&br2=${localData.Black.Pieces[9].pos}&bn1=${localData.Black.Pieces[10].pos}&bn2=${localData.Black.Pieces[11].pos}&bb1=${localData.Black.Pieces[12].pos}&bb2=${localData.Black.Pieces[13].pos}` +
+    `&bq=${localData.Black.Pieces[14].pos}&bk=${localData.Black.Pieces[15].pos}`;
   const blob = await fetch(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData${params}&set=true`);
+  console.log(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData${params}&set=true`);
 }
 
-//set local data, then positions
-function setLocal(json) {
-  console.log(json);
-  localData = json;
-  setAllPos(false);
-}
-
-//get server data
+//get server data, set localData, set positions
 async function getServer() {
   const blob = await fetch(`https://chessonlinedata.netlify.app/.netlify/functions/sessionData`);
   const json = await blob.json();
-  setLocal(json);
+  localData = json;
+  for (let i = 0; i < 16; i++) {
+    glbArr[0][i].position.set(...decodePos(localData.White.Pieces[i].pos));
+    glbArr[1][i].position.set(...decodePos(localData.Black.Pieces[i].pos));
+  }
 }
+//starting new game
 resetLocal();
+
+//update loop
+//setInterval(() => {
 setServer();
 getServer();
+//}, 2000);
